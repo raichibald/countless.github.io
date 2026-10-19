@@ -1,16 +1,511 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2299.5">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-  </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Countless: Push Up Counter for AirPods</title>
+    <meta
+        name="description"
+        content="Countless counts your push-ups from the motion sensor in your AirPods. No camera, no phone on the floor, no tapping between sets. Free for iPhone."
+    />
+    <meta name="theme-color" content="#0B0C0F" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="apple-itunes-app" content="app-id=6807464779" />
+    <link rel="canonical" href="https://raichibald.github.io/countless.github.io/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Countless" />
+    <meta property="og:title" content="Countless: Push Up Counter for AirPods" />
+    <meta property="og:description" content="Do push-ups. We'll count. Countless counts every rep from your AirPods." />
+    <meta property="og:url" content="https://raichibald.github.io/countless.github.io/" />
+    <meta property="og:image" content="https://raichibald.github.io/countless.github.io/assets/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="preload" as="image" href="assets/shot-start.webp" type="image/webp" />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+        document.documentElement.classList.add("js");
+    </script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Countless: Push Up Counter",
+            "operatingSystem": "iOS 26.0 or later",
+            "applicationCategory": "HealthApplication",
+            "description": "Counts your push-ups from the motion sensor in your AirPods.",
+            "url": "https://raichibald.github.io/countless.github.io/",
+            "downloadUrl": "https://apps.apple.com/app/id6807464779",
+            "image": "https://raichibald.github.io/countless.github.io/assets/icon-512.png",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+            "author": { "@type": "Person", "name": "Raitis Šaripo" }
+        }
+    </script>
 </head>
 <body>
-<p class="p1">Countless Push-Up App support email - saripo.raitis@gmail.com</p>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header" id="top">
+        <div class="wrap bar">
+            <a class="brand" href="#top" aria-label="Countless home">
+                <img src="assets/icon-192.webp" width="36" height="36" alt="" />
+                <span>Countless</span>
+            </a>
+            <nav class="nav" aria-label="Primary">
+                <a href="#how">How it works</a>
+                <a href="#features">Features</a>
+                <a href="#pro">Pro</a>
+                <a href="#faq">FAQ</a>
+                <a href="#support">Support</a>
+            </nav>
+            <a class="btn btn-sm" href="https://apps.apple.com/app/id6807464779">Get the app</a>
+        </div>
+    </header>
+
+    <main id="main">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="wrap hero-grid">
+                <div class="hero-copy">
+                    <p class="chip"><span class="dot"></span>For AirPods · iPhone</p>
+                    <h1><span class="nb">Do push-ups.</span><br /><span class="volt nb">We’ll count.</span></h1>
+                    <p class="lead">
+                        Countless counts every rep from the motion sensor in your AirPods. No camera, no phone on the
+                        floor, no tapping between sets.
+                    </p>
+                    <div class="cta-row">
+                        <a class="btn btn-lg" href="https://apps.apple.com/app/id6807464779">
+                            Download on the App Store
+                            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                                <path d="M5 12h14M13 6l6 6-6 6" />
+                            </svg>
+                        </a>
+                        <a class="btn btn-ghost btn-lg" href="#how">See how it works</a>
+                    </div>
+                    <ul class="trust">
+                        <li>Free to count</li>
+                        <li>No account</li>
+                        <li>No ads</li>
+                    </ul>
+                </div>
+
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="phone" style="--pw: 290px">
+                        <div class="screen" id="hero-screens">
+                            <img class="on" src="assets/shot-start.webp" width="660" height="1434" alt="" />
+                            <img src="assets/shot-counting.webp" width="660" height="1434" alt="" loading="lazy" />
+                            <img src="assets/shot-summary.webp" width="660" height="1434" alt="" loading="lazy" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it works -->
+        <section class="section" id="how">
+            <div class="wrap how-grid">
+                <div class="demo reveal" aria-hidden="true">
+                    <canvas id="demo-canvas"></canvas>
+                    <div class="demo-center">
+                        <div class="demo-count" id="demo-count">0</div>
+                        <div class="demo-tick" id="demo-tick">tick</div>
+                    </div>
+                </div>
+
+                <div class="how-copy">
+                    <p class="eyebrow">How it works</p>
+                    <h2>Your head moves with every rep. Countless listens.</h2>
+                    <ol class="steps">
+                        <li class="reveal">
+                            <span class="num">1</span>
+                            <div>
+                                <h3>Put your AirPods in</h3>
+                                <p>
+                                    Anything with a motion sensor works: AirPods Pro, AirPods 3 and later, AirPods Max,
+                                    Beats Fit Pro, Powerbeats Pro 2.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="reveal">
+                            <span class="num">2</span>
+                            <div>
+                                <h3>Tap Start, get down</h3>
+                                <p>One tap, then just do push-ups. The phone can stay in your pocket.</p>
+                            </div>
+                        </li>
+                        <li class="reveal">
+                            <span class="num">3</span>
+                            <div>
+                                <h3>Hear the tick</h3>
+                                <p>
+                                    A quiet tick at the bottom of every rep and a marker on every tenth. Stop moving and
+                                    the set finishes on its own.
+                                </p>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="section alt" id="features">
+            <div class="wrap">
+                <header class="section-head reveal">
+                    <p class="eyebrow">Features</p>
+                    <h2>Everything for the floor. Nothing in the way.</h2>
+                </header>
+                <div class="cards">
+                    <article class="card reveal">
+                        <span class="ico">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M4 15v-3a8 8 0 0 1 16 0v3" />
+                                <rect x="3" y="14" width="4" height="6" rx="2" />
+                                <rect x="17" y="14" width="4" height="6" rx="2" />
+                            </svg>
+                        </span>
+                        <h3>Hands-free counting</h3>
+                        <p>
+                            Countless reads your AirPods’ motion sensor in real time. No camera, and the microphone is
+                            never used.
+                        </p>
+                    </article>
+                    <article class="card reveal">
+                        <span class="ico">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </span>
+                        <h3>Readable from the floor</h3>
+                        <p>A huge count in the middle of the screen, so you can check it mid-set without moving.</p>
+                    </article>
+                    <article class="card reveal">
+                        <span class="ico">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M5 21V4M5 4h11l-2 4 2 4H5" />
+                            </svg>
+                        </span>
+                        <h3>Sets finish themselves</h3>
+                        <p>Stop and the set ends on its own. Interrupted sets are kept, never thrown away.</p>
+                    </article>
+                    <article class="card reveal">
+                        <span class="ico">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M4 20h4L19 9l-4-4L4 16v4z" />
+                                <path d="M13.5 6.5l4 4" />
+                            </svg>
+                        </span>
+                        <h3>Fix it in one tap</h3>
+                        <p>Missed a rep? Edit the count, or log a set you did without earbuds.</p>
+                    </article>
+                    <article class="card reveal">
+                        <span class="ico">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M8 4h8v5a4 4 0 0 1-8 0V4z" />
+                                <path d="M8 6H4v1a4 4 0 0 0 4 4M16 6h4v1a4 4 0 0 1-4 4M12 13v4M8 20h8M10 17h4" />
+                            </svg>
+                        </span>
+                        <h3>Challenges &amp; milestones</h3>
+                        <p>Targets to work toward, and achievements as you pass them, from your first set to 5,000.</p>
+                    </article>
+                    <article class="card reveal">
+                        <span class="ico">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z" />
+                            </svg>
+                        </span>
+                        <h3>Apple Health <span class="tag">Pro</span></h3>
+                        <p>Save each set as a strength workout, with calories estimated from the weight you enter.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screens -->
+        <section class="section" id="screens">
+            <div class="wrap">
+                <header class="section-head reveal">
+                    <p class="eyebrow">Screens</p>
+                    <h2>Built to be read at a glance.</h2>
+                </header>
+            </div>
+            <div class="gallery">
+                <div class="gallery-track" tabindex="0" aria-label="App screenshots">
+                    <figure>
+                        <div class="phone" style="--pw: 250px">
+                            <div class="screen">
+                                <img src="assets/shot-start.webp" width="660" height="1434" alt="Countless start screen with a connected badge, today’s total and a Start button" loading="lazy" />
+                            </div>
+                        </div>
+                        <figcaption><strong>Start</strong>One tap. Shows when your headphones are connected.</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone" style="--pw: 250px">
+                            <div class="screen">
+                                <img src="assets/shot-counting.webp" width="660" height="1434" alt="A set in progress showing a large count of 25 inside a ring" loading="lazy" />
+                            </div>
+                        </div>
+                        <figcaption><strong>Count</strong>A big number and a ring. Hold to finish.</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone" style="--pw: 250px">
+                            <div class="screen">
+                                <img src="assets/shot-summary.webp" width="660" height="1434" alt="Set summary with 58 reps, time and average gap between reps" loading="lazy" />
+                            </div>
+                        </div>
+                        <figcaption><strong>Summary</strong>Reps, time and tempo, with a flag on your best set.</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone" style="--pw: 250px">
+                            <div class="screen">
+                                <img src="assets/shot-stats.webp" width="660" height="1434" alt="Stats screen with a ring showing 82 of 100 today, a 12-week activity grid and a best-set chart" loading="lazy" />
+                            </div>
+                        </div>
+                        <figcaption><strong>Stats</strong>Today’s ring, 12 weeks of activity and your best set.</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone" style="--pw: 250px">
+                            <div class="screen">
+                                <img src="assets/shot-trends.webp" width="660" height="1434" alt="Trends screen with weekly volume and best set over time charts" loading="lazy" />
+                            </div>
+                        </div>
+                        <figcaption><strong>Trends</strong>Weekly volume, best set and days trained.</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone" style="--pw: 250px">
+                            <div class="screen">
+                                <img src="assets/shot-challenges.webp" width="660" height="1434" alt="Challenges screen with a 7-day streak, a 40-rep best set and a 100-reps-a-day target, each with a progress bar" loading="lazy" />
+                            </div>
+                        </div>
+                        <figcaption><strong>Challenges</strong>Streak, best-set and daily targets, with progress.</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone" style="--pw: 250px">
+                            <div class="screen">
+                                <img src="assets/shot-achievements.webp" width="660" height="1434" alt="Achievements list including 1,000 push-ups all time and a 7-day streak" loading="lazy" />
+                            </div>
+                        </div>
+                        <figcaption><strong>Achievements</strong>Milestones, collected as you pass them.</figcaption>
+                    </figure>
+                </div>
+                <div class="wrap gallery-ctrl">
+                    <button class="arrow" type="button" id="g-prev" aria-label="Previous screens">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+                    </button>
+                    <button class="arrow" type="button" id="g-next" aria-label="Next screens">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Privacy -->
+        <section class="section alt" id="privacy">
+            <div class="wrap privacy">
+                <div class="reveal">
+                    <span class="ico lg">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <rect x="5" y="11" width="14" height="9" rx="2" />
+                            <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+                        </svg>
+                    </span>
+                    <h2>Your sets stay on your phone.</h2>
+                    <p class="lead">
+                        There’s no account and no cloud sync. Your sessions, totals and the weight you enter live in a
+                        database on your device. Anonymous usage and crash reports never include your reps.
+                    </p>
+                    <p><a class="text-link" href="privacy-policy.html">Read the privacy policy →</a></p>
+                </div>
+                <ul class="checks reveal">
+                    <li><strong>No account</strong> to create or remember</li>
+                    <li><strong>No ads</strong> and no tracking across other apps</li>
+                    <li><strong>No camera</strong> and no microphone</li>
+                    <li><strong>Raw motion</strong> is never recorded or sent anywhere</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Headphones -->
+        <section class="section" id="headphones">
+            <div class="wrap narrow">
+                <header class="section-head center reveal">
+                    <p class="eyebrow">Compatible headphones</p>
+                    <h2>If it has head tracking, it counts.</h2>
+                </header>
+                <ul class="pills reveal">
+                    <li>AirPods Pro (all generations)</li>
+                    <li>AirPods (3rd generation and later)</li>
+                    <li>AirPods Max</li>
+                    <li>Beats Fit Pro</li>
+                    <li>Powerbeats Pro 2</li>
+                </ul>
+                <p class="fine center reveal">
+                    AirPods 1st and 2nd generation have no motion sensor, so automatic counting isn’t possible. Requires
+                    iPhone with iOS 26 or later. No compatible headphones? You can still log sets by hand.
+                </p>
+            </div>
+        </section>
+
+        <!-- Pro -->
+        <section class="section alt" id="pro">
+            <div class="wrap">
+                <header class="section-head center reveal">
+                    <p class="eyebrow">Free &amp; Pro</p>
+                    <h2>Counting is free. Pro goes deeper.</h2>
+                </header>
+                <div class="plans">
+                    <article class="plan reveal">
+                        <h3>Free</h3>
+                        <p class="plan-sub">Everything you need to count.</p>
+                        <ul>
+                            <li>Unlimited counting</li>
+                            <li>Your last seven days of history</li>
+                            <li>Challenges and achievements</li>
+                            <li>Fix a count or log a set by hand</li>
+                        </ul>
+                    </article>
+                    <article class="plan pro reveal">
+                        <h3>Countless Pro</h3>
+                        <p class="plan-sub">For when you want the whole picture.</p>
+                        <ul>
+                            <li>Your whole history</li>
+                            <li>Records: best set, best day, longest streak</li>
+                            <li>Trends: weekly volume, training days, time of day</li>
+                            <li>Write sets to Apple Health</li>
+                        </ul>
+                    </article>
+                </div>
+                <p class="fine center">
+                    Pro is an optional auto-renewing subscription, monthly or yearly. The price and any trial offer are
+                    shown in the app before you subscribe. Manage or cancel any time in Settings → your name →
+                    Subscriptions.
+                </p>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section" id="faq">
+            <div class="wrap narrow">
+                <header class="section-head center reveal">
+                    <p class="eyebrow">FAQ</p>
+                    <h2>Good questions.</h2>
+                </header>
+                <div class="faq reveal">
+                    <details>
+                        <summary>Which headphones do I need?</summary>
+                        <p>
+                            AirPods Pro (any generation), AirPods 3rd generation and later, AirPods Max, Beats Fit Pro or
+                            Powerbeats Pro 2. AirPods 1st and 2nd generation don’t have a motion sensor and can’t count.
+                            You also need to allow Motion &amp; Fitness access when iOS asks.
+                        </p>
+                    </details>
+                    <details>
+                        <summary>Does it keep counting with the screen off?</summary>
+                        <p>
+                            Yes. Countless holds an audio session so it can keep counting while the screen is off or the
+                            app is in the background. That’s also why you hear the tick in your headphones.
+                        </p>
+                    </details>
+                    <details>
+                        <summary>How accurate is the count?</summary>
+                        <p>
+                            Counts come from head motion, so they’re an approximation: a rep can be missed, or other
+                            movement can be counted. If it’s off, fix the count in one tap after the set.
+                        </p>
+                    </details>
+                    <details>
+                        <summary>Does it use the camera or microphone?</summary>
+                        <p>
+                            No. It reads the motion sensor in your headphones. The only audio is the short tick it plays
+                            for you.
+                        </p>
+                    </details>
+                    <details>
+                        <summary>Do I need an account? Where is my data?</summary>
+                        <p>
+                            No account. Your sets are stored on your device only and aren’t synced, so they travel with
+                            your device’s own iCloud or iTunes backup if you have one. Deleting the app deletes the data
+                            it holds.
+                        </p>
+                    </details>
+                    <details>
+                        <summary>How do I cancel Pro?</summary>
+                        <p>
+                            In the iOS Settings app, tap your name → Subscriptions, or manage it in the App Store.
+                            Cancelling stops future renewals, and access continues until the period you’ve paid for
+                            ends. Deleting the app does not cancel a subscription.
+                        </p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support -->
+        <section class="section alt" id="support">
+            <div class="wrap narrow center reveal">
+                <p class="eyebrow">Support</p>
+                <h2>Questions, bugs, ideas?</h2>
+                <p class="lead">
+                    Countless is made by one person, and every email gets read. You can also ask to access or delete any
+                    personal data.
+                </p>
+                <p class="support-mail">
+                    Countless Push-Up App support email:
+                    <a href="mailto:saripo.raitis@gmail.com?subject=Countless%20support">saripo.raitis@gmail.com</a>
+                </p>
+                <p>
+                    <a class="btn" href="mailto:saripo.raitis@gmail.com?subject=Countless%20support">Email support</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="final">
+            <div class="wrap center reveal">
+                <img src="assets/icon-192.webp" width="88" height="88" alt="Countless app icon" class="final-icon" loading="lazy" />
+                <h2>Do push-ups. <span class="volt">We’ll count.</span></h2>
+                <p>
+                    <a class="btn btn-lg" href="https://apps.apple.com/app/id6807464779">
+                        Download on the App Store
+                        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                            <path d="M5 12h14M13 6l6 6-6 6" />
+                        </svg>
+                    </a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap foot-grid">
+            <div>
+                <a class="brand" href="#top">
+                    <img src="assets/icon-192.webp" width="28" height="28" alt="" />
+                    <span>Countless</span>
+                </a>
+                <p class="fine">© 2026 Raitis Šaripo</p>
+            </div>
+            <nav class="foot-links" aria-label="Legal and support">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
+                <a href="mailto:saripo.raitis@gmail.com?subject=Countless%20support">Support</a>
+            </nav>
+        </div>
+        <div class="wrap">
+            <p class="legal">
+                Countless is a fitness tool, not a medical device. Consult a doctor before starting or changing an
+                exercise routine. Apple, AirPods, Apple Health and App Store are trademarks of Apple Inc., registered in
+                the U.S. and other countries. Beats is a trademark of Beats Electronics LLC. Countless is not endorsed
+                by or affiliated with Apple Inc.
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
 </body>
 </html>
