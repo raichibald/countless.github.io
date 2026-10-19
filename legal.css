@@ -1,0 +1,167 @@
+/* Privacy policy and terms: same tokens and chrome as the landing page (styles.css). */
+.doc-wrap {
+    width: 100%;
+    max-width: calc(780px + var(--gutter) * 2);
+    margin-inline: auto;
+    padding: clamp(32px, 6vw, 72px) var(--gutter) clamp(48px, 8vw, 96px);
+}
+
+.doc-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 28px;
+    color: var(--muted);
+    font-size: 15px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.doc-back:hover {
+    color: var(--text);
+}
+.doc-back svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.doc h1 {
+    margin: 0 0 28px;
+    font-size: clamp(2.3rem, 6.5vw, 3.6rem);
+    line-height: 1.04;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+}
+
+.doc h2 {
+    margin: 2.4em 0 0.7em;
+    padding-top: 1.3em;
+    border-top: 1px solid var(--border);
+    font-size: clamp(1.3rem, 3.2vw, 1.65rem);
+    line-height: 1.2;
+    font-weight: 720;
+    letter-spacing: -0.02em;
+}
+
+.doc p,
+.doc li {
+    color: #c5cad0;
+    font-size: 16.5px;
+    line-height: 1.7;
+}
+.doc p {
+    margin: 0 0 1em;
+}
+.doc ul {
+    margin: 0 0 1.2em;
+    padding-left: 1.35em;
+}
+.doc li {
+    margin-bottom: 0.5em;
+    padding-left: 0.25em;
+}
+.doc li::marker {
+    color: var(--volt);
+}
+.doc a {
+    color: var(--volt);
+    text-decoration-color: rgba(195, 255, 61, 0.4);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s;
+}
+.doc a:hover {
+    text-decoration-color: var(--volt);
+}
+.doc > br {
+    display: none;
+}
+.doc hr {
+    margin: 3em 0 1.4em;
+    border: 0;
+    border-top: 1px solid var(--border);
+}
+.doc hr + p,
+.doc hr + p span {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* On this page */
+.toc {
+    margin: 0 0 32px;
+    padding: 22px 24px;
+    border-radius: var(--r-lg);
+    background: var(--surface);
+    border: 1px solid var(--border);
+}
+.toc summary {
+    position: relative;
+    margin: 0;
+    padding-right: 28px;
+    color: var(--volt);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    list-style: none;
+    cursor: pointer;
+}
+.toc summary::-webkit-details-marker {
+    display: none;
+}
+.toc summary::after {
+    content: "";
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    margin-top: -6px;
+    border-right: 2px solid var(--volt);
+    border-bottom: 2px solid var(--volt);
+    transform: rotate(45deg);
+    transition: transform 0.25s;
+}
+.toc[open] summary {
+    margin-bottom: 14px;
+}
+.toc[open] summary::after {
+    margin-top: -1px;
+    transform: rotate(-135deg);
+}
+.toc ol {
+    margin: 0;
+    padding-left: 1.4em;
+    columns: 2 260px;
+    column-gap: 36px;
+}
+.toc li {
+    margin: 0 0 6px;
+    padding-left: 0.2em;
+    break-inside: avoid;
+    font-size: 15px;
+    line-height: 1.45;
+}
+.toc li::marker {
+    color: var(--muted);
+    font-size: 13px;
+}
+.toc a {
+    color: var(--text);
+    text-decoration: none;
+}
+.toc a:hover {
+    color: var(--volt);
+}
+.doc .toc + h2,
+.doc .toc ~ h2:first-of-type {
+    margin-top: 2em;
+}
+
+@media (max-width: 420px) {
+    .toc {
+        padding: 18px;
+    }
+}

@@ -9,6 +9,10 @@
     onScroll();
     addEventListener("scroll", onScroll, { passive: true });
 
+    // Privacy and terms pages: start the table of contents collapsed on phones.
+    const toc = document.querySelector("details.toc");
+    if (toc && matchMedia("(max-width: 719px)").matches) toc.open = false;
+
     // Reveal on scroll.
     const reveals = document.querySelectorAll(".reveal");
     if ("IntersectionObserver" in window && !reduceMotion) {
