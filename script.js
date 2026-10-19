@@ -43,6 +43,14 @@
         }, 3600);
     }
 
+    // Support button: the address is only assembled on click, so it isn't sitting in the page source.
+    document.querySelectorAll("[data-mail]").forEach((a) => {
+        a.addEventListener("click", (e) => {
+            e.preventDefault();
+            location.href = `mailto:${["saripo.raitis", "gmail.com"].join("@")}?subject=Countless%20support`;
+        });
+    });
+
     // Gallery arrows.
     const track = document.querySelector(".gallery-track");
     if (track) {
@@ -57,13 +65,26 @@
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     const countEl = document.getElementById("demo-count");
-    const tickEl = document.getElementById("demo-tick");
 
     const MAX = 25;
     const GAP = 1200; // ms between reps
     const HOLD = 2600; // ms the finished set stays on screen
-    const RING = 150;
+    const RING = 240;
     const TAU = Math.PI * 2;
+
+    // A fixed ring of dots like the app's counting screen: a true circle, each dot with its own
+    // size, brightness and tiny radial offset.
+    const rnd = (n) => {
+        const x = Math.sin(n * 127.1 + 311.7) * 43758.5453;
+        return x - Math.floor(x);
+    };
+    const dots = Array.from({ length: RING }, (_, i) => ({
+        a: (i / RING) * TAU,
+        off: (rnd(i) - 0.5) * 1.6,
+        size: 1.3 + rnd(i + 500) * 1.1,
+        base: 0.45 + rnd(i + 1000) * 0.55,
+        phase: rnd(i + 1500) * TAU,
+    }));
 
     let size = 0;
     let count = 0;
@@ -91,9 +112,6 @@
         setCount(count + 1);
         pulse = 1;
         ripples.push(t);
-        tickEl.textContent = count % 10 === 0 ? "tick · marker" : "tick";
-        tickEl.classList.add("on");
-        requestAnimationFrame(() => requestAnimationFrame(() => tickEl.classList.remove("on")));
     }
 
     function draw(t) {
@@ -117,14 +135,12 @@
             ctx.stroke();
         }
 
-        for (let i = 0; i < RING; i++) {
-            const a = (i / RING) * TAU;
-            const wob = Math.sin(a * 5 + t * 0.0012) * 1.6 + Math.sin(a * 9 - t * 0.0017) * 1.3;
-            const r = base + wob * (1 + pulse * 2.4) + pulse * size * 0.02;
-            const alpha = 0.3 + 0.4 * (Math.sin(a * 3 + t * 0.002) * 0.5 + 0.5) + 0.3 * pulse;
+        const r = base + pulse * size * 0.012;
+        for (const d of dots) {
+            const alpha = Math.min(1, d.base * (0.85 + 0.15 * Math.sin(t * 0.002 + d.phase)) + 0.35 * pulse);
             ctx.beginPath();
-            ctx.arc(c + Math.cos(a) * r, c + Math.sin(a) * r, 1.5 + pulse * 1.2, 0, TAU);
-            ctx.fillStyle = `rgba(195,255,61,${Math.min(alpha, 1)})`;
+            ctx.arc(c + Math.cos(d.a) * (r + d.off), c + Math.sin(d.a) * (r + d.off), d.size * (1 + pulse * 0.5), 0, TAU);
+            ctx.fillStyle = `rgba(195,255,61,${alpha})`;
             ctx.fill();
         }
     }
